@@ -23,25 +23,17 @@ digit_patterns = {
     "013456" : "6", 
     "025" : "7", 
     "0123456" : "8", 
-    "01235" : "9"
+    "012356" : "9"
 }
-print(digit_patterns)
-def solve(patterns, digits):
-    correct = None
-    for perm in permutations(map(str, range(7))):
-        mapping = {k : v for k, v in zip("abcdefg", perm)}
-        if mapping["".join(sorted(mapping[c] for c in "acedgfb"))] == "8":
-            print(mapping)
-        found_digits = 0
-        for pattern in patterns:
-            possible_digit = "".join(sorted(mapping[c] for c in pattern))
-            if possible_digit in digit_patterns:
-                found_digits += 1
-        if found_digits == 10:
-            correct = mapping
-            break
-    return int("".join(digit_patterns["".join(sorted(correct[c] for c in pattern))] for pattern in digits))
 
+def solve(patterns, digits):
+	correct = None
+	for perm in permutations(map(str, range(7))):
+		mapping = {k : v for k, v in zip('abcdefg', perm)}
+		if all(("".join(sorted(mapping[c] for c in digit)) in digit_patterns) for digit in patterns):
+			correct = mapping
+			break
+	return int("".join(digit_patterns["".join(sorted(correct[c] for c in digit))] for digit in digits))
 
 ans2 = 0
 for line in data:
