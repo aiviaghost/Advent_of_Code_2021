@@ -8,7 +8,7 @@ for line in init_grid:
     grid.append(["."] * 100 + list(line) + ["."] * 100)
 grid += [["."] * (len(init_grid) + 200) for _ in range(100)]
 
-# 1
+# 1 & 2
 def solve(grid, itr):
     for _ in range(itr):
         gc = [line.copy() for line in grid]
